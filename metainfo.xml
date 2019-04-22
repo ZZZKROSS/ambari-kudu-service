@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<metainfo>
+    <schemaVersion>2.0</schemaVersion>
+    <services>
+        <service>
+            <name>KUDU</name>
+            <displayName>Kudu</displayName>
+            <comment>a compute engine which work with impala</comment>
+            <version>1.4.0</version>
+            <components>
+                <component>
+                  <name>KUDU_MASTER</name>
+                  <displayName>Kudu_Master</displayName>
+                  <category>MASTER</category>
+                  <cardinality>1+</cardinality>
+                  <commandScript>
+                    <script>scripts/kudu-master.py</script>
+                    <scriptType>PYTHON</scriptType>
+                    <timeout>10000</timeout>
+                  </commandScript>
+                </component>
+
+                <component>
+                  <name>KUDU_TSERVER</name>
+                  <displayName>Kudu_TServer</displayName>
+                  <category>SLAVE</category>
+                  <cardinality>1+</cardinality>
+                  <commandScript>
+                    <script>scripts/kudu-tserver.py</script>
+                    <scriptType>PYTHON</scriptType>
+                    <timeout>10000</timeout>
+                  </commandScript>
+                </component>
+            </components>
+
+            <requiredServices>
+              <service>IMPALA</service>
+            </requiredServices>
+
+            <configuration-dependencies>
+              <config-type>kudu-env</config-type>
+            </configuration-dependencies>
+        </service>
+    </services>
+</metainfo>
